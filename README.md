@@ -1,10 +1,10 @@
-# Blockchain Commons `$projectname`
+# Blockchain Commons Deployment Scripts
 
 <!--Guidelines: https://github.com/BlockchainCommons/secure-template/wiki -->
 
 ### _by $major-authors_
 
-**`$ProjectDescription`** is …
+**Deployment Scripts** contains scripts used to run blockchain services at Blockchain Commons.
 
 ## Additional Information
 
