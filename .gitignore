@@ -1,3 +1,8 @@
+# Files that should never be committed because they contain credentials
+# and private keys. 
+etc/nagios4/htdigest.users
+etc/nagios4/resource.cfg
+
 # Created by https://www.gitignore.io/api/macos
 
 ### macOS ###
