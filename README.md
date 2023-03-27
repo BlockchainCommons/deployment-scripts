@@ -44,11 +44,11 @@ Also see our standard Bitcoin setup with [Bitcoin Standup Scripts](https://githu
 
 ## Status 
 
-` $projectname`  is used for installing and maintaining BlockchainCommons infrastructure and so it's under continuous development.
+`deployment-scripts` is used for installing and maintaining BlockchainCommons infrastructure and so it's under continuous development.
 
 ### Dependencies
 
-To use  `$projectname` you'll need to use the following tools:
+To use `deployment-scripts` you'll need to use the following tools:
 
 - A Debian Linode VPS.
 - Nagios4.
@@ -56,9 +56,9 @@ To use  `$projectname` you'll need to use the following tools:
 
 ## Financial Support
 
-`$projectname` is a project of [Blockchain Commons](https://www.blockchaincommons.com/). We are proudly a "not-for-profit" social benefit corporation committed to open source & open development. Our work is funded entirely by donations and collaborative partnerships with people like you. Every contribution will be spent on building open tools, technologies, and techniques that sustain and advance blockchain and internet security infrastructure and promote an open web.
+`deployment-scripts` is a project of [Blockchain Commons](https://www.blockchaincommons.com/). We are proudly a "not-for-profit" social benefit corporation committed to open source & open development. Our work is funded entirely by donations and collaborative partnerships with people like you. Every contribution will be spent on building open tools, technologies, and techniques that sustain and advance blockchain and internet security infrastructure and promote an open web.
 
-To financially support further development of `$projectname` and other projects, please consider becoming a Patron of Blockchain Commons through ongoing monthly patronage as a [GitHub Sponsor](https://github.com/sponsors/BlockchainCommons). You can also support Blockchain Commons with bitcoins at our [BTCPay Server](https://btcpay.blockchaincommons.com/).
+To financially support further development of `deployment-scripts` and other projects, please consider becoming a Patron of Blockchain Commons through ongoing monthly patronage as a [GitHub Sponsor](https://github.com/sponsors/BlockchainCommons). You can also support Blockchain Commons with bitcoins at our [BTCPay Server](https://btcpay.blockchaincommons.com/).
 
 ## Contributing
 
