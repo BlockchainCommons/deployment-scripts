@@ -2,15 +2,13 @@
 
 <!--Guidelines: https://github.com/BlockchainCommons/secure-template/wiki -->
 
-### _by $major-authors_
+### _by Nicholas Ochiel_
 
 **Deployment Scripts** contains scripts used to run blockchain services at Blockchain Commons.
 
-## Additional Information
-
-The following files contain…
-
-* `$ListOfEssentialDocs`
+## List of files
+- `/etc/nagios4`: Configuration for nagios4 monitoring. 
+  - Nagios configuration reference can be found here: https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/4/en/toc.html.
 
 ### Also See
 
@@ -18,86 +16,49 @@ Also see our standard Bitcoin setup with [Bitcoin Standup Scripts](https://githu
 
 ## Installation Instructions
 
+- [Install Linode's LongView](https://www.linode.com/docs/guides/monitor-and-configure-nagios-alerts-on-debian-10-ubuntu-2004/#install-email-services)
+- [Install Nagios on Linode](https://www.linode.com/docs/products/tools/monitoring/developers/)
+- [Install Tor](https://support.torproject.org/apt/#apt_tor-deb-repo)
+
 ## Usage Instructions
-## Status - Alpha
 
-` $projectname`  is currently under active development and in the alpha testing phase. It should not be used for production tasks until it has had further testing and auditing. See [Blockchain Commons' Development Phases](https://github.com/BlockchainCommons/Community/blob/master/release-path.md).
+**NB: Do not commit any credentials to this repository.** Any credentials/keys should be configured as `$USER` variables in etc\nagios4\resource.cfg. We use the following:
+- `$USER2`: Tor proxy port.
+- `$USER3`: Username for BlockckainCommons Bitcoin RPC.
+- `$USER4`: RPC auth password generated using https://github.com/bitcoin/bitcoin/blob/master/share/rpcauth/rpcauth.py.
 
-### Version History
+### Nagios 
+- Define hosts to be monitored in: etc\nagios4\servers\servers.cfg
+#### Nagios email notifications
+- List contact details in etc\nagios4\objects\contacts.cfg.
+- There are several alternative setups for email notifications:
+    - [Using Gmail](https://www.linode.com/docs/guides/configure-postfix-to-send-mail-using-gmail-and-google-workspace-on-debian-or-ubuntu/)
+    - [Using external SMTP](https://www.linode.com/docs/guides/postfix-smtp-debian7/)
+    - [Run a Linode mail-server on a subdomain](https://www.linode.com/docs/guides/running-a-mail-server/#sending-email-on-linode)
+    - Modify any `notify-host-by-email` `command` directives in `etc/nagios4/commands.cfg` to use the settings you have configured for sending email.
 
-### Roadmap
+#### Nagios monitoring of Tor services
+- The hostname for a Tor hidden service is read using: `cat /var/lib/tor/$HOSTNAME/hostname`
+- Modify any `service.check_command` directives to use the `check_http! -p $USER2` to monitor hidden services.
+    - `$USER2` is a variable configured in etc\nagios4\resource.cfg.
 
-## Origin, Authors, Copyright & Licenses
+## Status 
 
-Unless otherwise noted (either in this [/README.md](./README.md) or in the file's header comments) the contents of this repository are Copyright © 2020 by Blockchain Commons, LLC, and are [licensed](./LICENSE) under the [spdx:BSD-2-Clause Plus Patent License](https://spdx.org/licenses/BSD-2-Clause-Patent.html).
-
-In most cases, the authors, copyright, and license for each file reside in header comments in the source code. When it does not, we have attempted to attribute it accurately in the table below.
-
-This table below also establishes provenance (repository of origin, permalink, and commit id) for files included from repositories that are outside of this repo. Contributors to these files are listed in the commit history for each repository, first with changes found in the commit history of this repo, then in changes in the commit history of their repo of their origin.
-
-| File      | From                                                         | Commit                                                       | Authors & Copyright (c)                                | License                                                     |
-| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------ | ----------------------------------------------------------- |
-| exception-to-the-rule.c or exception-folder | [https://github.com/community/repo-name/PERMALINK](https://github.com/community/repo-name/PERMALINK) | [https://github.com/community/repo-name/commit/COMMITHASH]() | 2020 Exception Author  | [MIT](https://spdx.org/licenses/MIT)                        |
+` $projectname`  is used for installing and maintaining BlockchainCommons infrastructure and so it's under continuous development.
 
 ### Dependencies
 
-To build  `$projectname` you'll need to use the following tools:
+To use  `$projectname` you'll need to use the following tools:
 
-- autotools - Gnu Build System from Free Software Foundation ([intro](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html)).
-
-Other prerequisites include:
-
-...
-
-### Libraries
-
-The following external libraries are used with `$projectname`:
-
-- [community/repo-name](https://github.com/community/repo-name) — What the library does (use OR fork [version] OR include [version]).
-
-Libraries may be marked as `use` (the current version of the library is used), `fork` (a specific version has been forked to the BCC repos for usage), or `include` (files from a specific version have been included).
-
-### Derived from ...
-
-This  `$projectname` project is either derived from or was inspired by:
-
-- [community/repo-name/](https://github.com/community/repo-name) — Repo that does what, by [developer](https://github.com/developer)  or from  [community](https://community.com).
-
-## Subsequent Usage
-
-### Adapted by ...
-
-These are adaptations, conversions, and wrappers that make `$projectname` available for other languages:
-
-- [community/repo-name/](https://github.com/community/repo-name) — Repo that does what, by [developer](https://github.com/developer)  or from  [community](https://community.com)(language).
-
-### Used by ...
-
-These are other projects that directly use `$projectname`:
-
-- [community/repo-name/](https://github.com/community/repo-name) — Repo that does what, by [developer](https://github.com/developer)  or from  [community](https://community.com)(use OR fork [version] OR include [version]).
-
-Libraries may be marked as `use` (the current version of our repo is used), `fork` (a specific version of our repo has been forked for usage), or `include` (files from a specific version of our repo have been included).
-
-### Used with ...
-
-These are other projects that work with or leverage `$projectname`:
-
-- [community/repo-name/](https://github.com/community/repo-name) — Repo that does what, by [developer](https://github.com/developer)  or from  [community](https://community.com).
+- A Debian Linode VPS.
+- Nagios4.
+- Tor
 
 ## Financial Support
 
 `$projectname` is a project of [Blockchain Commons](https://www.blockchaincommons.com/). We are proudly a "not-for-profit" social benefit corporation committed to open source & open development. Our work is funded entirely by donations and collaborative partnerships with people like you. Every contribution will be spent on building open tools, technologies, and techniques that sustain and advance blockchain and internet security infrastructure and promote an open web.
 
 To financially support further development of `$projectname` and other projects, please consider becoming a Patron of Blockchain Commons through ongoing monthly patronage as a [GitHub Sponsor](https://github.com/sponsors/BlockchainCommons). You can also support Blockchain Commons with bitcoins at our [BTCPay Server](https://btcpay.blockchaincommons.com/).
-
-### Project Sponsors
-
-Thanks to our project sponsors for their support of `$projectname`:
-
-$sponsor-logo-with-link
-
-$sponsor-description
 
 ## Contributing
 
@@ -127,6 +88,7 @@ The following people directly contributed to this repository. You can add your n
 | Name              | Role                | Github                                            | Email                                 | GPG Fingerprint                                    |
 | ----------------- | ------------------- | ------------------------------------------------- | ------------------------------------- | -------------------------------------------------- |
 | Christopher Allen | Principal Architect | [@ChristopherA](https://github.com/ChristopherA) | \<ChristopherA@LifeWithAlacrity.com\> | FDFE 14A5 4ECB 30FC 5D22  74EF F8D3 6C91 3574 05ED |
+| Nicholas Ochiel   | Site Reliability Engineering          | [@nochiel](https://github.com/nochiel) | \<nochiel@users.noreply.github.com\> | 45EA 5C81 9B7E E915 C2A2 7C64 4444 1190 7BE8 83D9 |
 
 ## Responsible Disclosure
 
